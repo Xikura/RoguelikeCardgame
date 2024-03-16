@@ -1,0 +1,240 @@
+[gd_scene load_steps=12 format=3 uid="uid://bayw73ve8ui7r"]
+
+[ext_resource type="Script" path="res://example.gd" id="1_0dn0o"]
+[ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_pile_ui_debugger.gd" id="2_7gbt2"]
+[ext_resource type="Script" path="res://example__dropzone__discard.gd" id="3_7f8qk"]
+[ext_resource type="Script" path="res://example__dropzone__play_primary.gd" id="3_7ovgx"]
+[ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_pile_ui.gd" id="3_axm7s"]
+[ext_resource type="Texture2D" uid="uid://bpjxsk1mxfl77" path="res://assets/1x1_#ffffffff.png" id="4_eyd4o"]
+[ext_resource type="PackedScene" uid="uid://bs2vgjwuarxm5" path="res://example__card_ui.tscn" id="6_df1s4"]
+[ext_resource type="Script" path="res://example__dropzone__play_joker.gd" id="6_y3x2e"]
+
+[sub_resource type="Theme" id="Theme_oqbkv"]
+Button/font_sizes/font_size = 12
+RichTextLabel/font_sizes/normal_font_size = 12
+
+[sub_resource type="Curve" id="Curve_ayyaa"]
+min_value = -15.0
+max_value = 15.0
+_data = [Vector2(0, -15), 0.0, 30.0, 0, 1, Vector2(1, 15), 30.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_afhc1"]
+max_value = 50.0
+_data = [Vector2(0, 0), 0.0, 127.284, 0, 0, Vector2(0.5, 40), 0.0, 0.0, 0, 0, Vector2(1, 0), -141.336, 0.0, 0, 0]
+point_count = 3
+
+[node name="Example" type="Node2D"]
+script = ExtResource("1_0dn0o")
+
+[node name="Buttons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+theme = SubResource("Theme_oqbkv")
+
+[node name="HBoxContainer" type="GridContainer" parent="Buttons"]
+layout_mode = 2
+offset_left = 13.0
+offset_top = 35.0
+offset_right = 318.0
+offset_bottom = 285.0
+scale = Vector2(0.9, 0.9)
+columns = 2
+metadata/_edit_group_ = true
+
+[node name="DrawButton" type="Button" parent="Buttons/HBoxContainer"]
+layout_mode = 2
+text = "Draw"
+
+[node name="Draw3Button" type="Button" parent="Buttons/HBoxContainer"]
+layout_mode = 2
+text = "Draw 3"
+
+[node name="SortButton" type="Button" parent="Buttons/HBoxContainer"]
+layout_mode = 2
+text = "Sort Hand"
+
+[node name="DiscardRandomButton" type="Button" parent="Buttons/HBoxContainer"]
+layout_mode = 2
+text = "Discard Random"
+
+[node name="DiscardHandButton" type="Button" parent="Buttons/HBoxContainer"]
+layout_mode = 2
+text = "Discard Hand"
+
+[node name="AddJokerToHandButton" type="Button" parent="Buttons/HBoxContainer"]
+layout_mode = 2
+text = "Add Joker To Hand"
+
+[node name="AddJokerToDiscardButton" type="Button" parent="Buttons/HBoxContainer"]
+layout_mode = 2
+text = "Add Joker To Discard"
+
+[node name="RandomDiscardToHandButton" type="Button" parent="Buttons/HBoxContainer"]
+layout_mode = 2
+text = "Return Random Discard
+To Hand"
+
+[node name="AddJokerToDropzonesButton" type="Button" parent="Buttons/HBoxContainer"]
+layout_mode = 2
+text = "Add Joker To Dropzones"
+
+[node name="MoveFromDropzoneToPileButton" type="Button" parent="Buttons/HBoxContainer"]
+layout_mode = 2
+text = "Discard Top Card
+of all Dropzones"
+
+[node name="MoveClubToDiamonds" type="Button" parent="Buttons/HBoxContainer"]
+layout_mode = 2
+text = "Move Top Club Dropzone
+to Diamonds"
+
+[node name="RemoveRandCardInHandFromGame" type="Button" parent="Buttons/HBoxContainer"]
+layout_mode = 2
+text = "Remove Random Card
+In Hand From Game"
+
+[node name="ResetButton" type="Button" parent="Buttons/HBoxContainer"]
+layout_mode = 2
+text = "Reset"
+
+[node name="CardPileUIDebugger" type="RichTextLabel" parent="Buttons" node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 2
+offset_left = 13.0
+offset_top = 295.0
+offset_right = 287.0
+offset_bottom = 391.0
+scroll_following = true
+script = ExtResource("2_7gbt2")
+card_pile_ui = NodePath("../../CardPileUI")
+
+[node name="CardDropzone_Primary" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 314.0
+offset_top = 254.0
+offset_right = 1020.0
+offset_bottom = 434.0
+script = ExtResource("3_7ovgx")
+card_type = "regular"
+card_pile_ui = NodePath("../CardPileUI")
+stack_display_gap = 145
+max_stack_display = 5
+can_drag_top_card = false
+can_drag_any_card = true
+layout = 2
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="CardDropzone_Primary"]
+modulate = Color(0.137255, 0.137255, 0.137255, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_eyd4o")
+
+[node name="CardDropzone_Discard" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1048.0
+offset_top = 495.0
+offset_right = 1191.0
+offset_bottom = 735.0
+script = ExtResource("3_7f8qk")
+card_pile_ui = NodePath("../CardPileUI")
+card_ui_face_up = false
+can_drag_top_card = false
+
+[node name="TextureRect" type="TextureRect" parent="CardDropzone_Discard"]
+modulate = Color(0.137255, 0.137255, 0.137255, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_eyd4o")
+
+[node name="DiscardLabel" type="Label" parent="CardDropzone_Discard"]
+layout_mode = 0
+offset_top = -23.0
+offset_right = 143.0
+text = "Discard"
+horizontal_alignment = 1
+
+[node name="CardDropzone_Jokers" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 314.0
+offset_top = 43.0
+offset_right = 1020.0
+offset_bottom = 223.0
+script = ExtResource("6_y3x2e")
+card_type = "joker"
+card_pile_ui = NodePath("../CardPileUI")
+stack_display_gap = 145
+max_stack_display = 5
+can_drag_top_card = false
+can_drag_any_card = true
+layout = 2
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="CardDropzone_Jokers"]
+modulate = Color(0.137255, 0.137255, 0.137255, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_eyd4o")
+
+[node name="DiamondsLabel" type="Label" parent="CardDropzone_Jokers"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -36.0
+offset_right = 161.0
+offset_bottom = -13.0
+pivot_offset = Vector2(-40, 81)
+text = "Generals
+"
+
+[node name="CardPileUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("3_axm7s")
+json_card_database_path = "res://cards/card-database.json"
+json_card_collection_path = "res://cards/card-starter-deck-01.json"
+extended_card_ui = ExtResource("6_df1s4")
+draw_pile_position = Vector2(20, 550)
+hand_pile_position = Vector2(550, 520)
+discard_pile_position = Vector2(1057, 548)
+draw_pile_layout = 2
+max_hand_size = 20
+hand_rotation_curve = SubResource("Curve_ayyaa")
+hand_vertical_curve = SubResource("Curve_afhc1")
+discard_face_up = false
+
+[connection signal="pressed" from="Buttons/HBoxContainer/DrawButton" to="." method="_on_draw_button_pressed"]
+[connection signal="pressed" from="Buttons/HBoxContainer/Draw3Button" to="." method="_on_draw_3_button_pressed"]
+[connection signal="pressed" from="Buttons/HBoxContainer/SortButton" to="." method="_on_sort_button_pressed"]
+[connection signal="pressed" from="Buttons/HBoxContainer/DiscardRandomButton" to="." method="_on_discard_random_button_pressed"]
+[connection signal="pressed" from="Buttons/HBoxContainer/DiscardHandButton" to="." method="_on_discard_hand_button_pressed"]
+[connection signal="pressed" from="Buttons/HBoxContainer/AddJokerToHandButton" to="." method="_on_add_joker_to_hand_button_pressed"]
+[connection signal="pressed" from="Buttons/HBoxContainer/AddJokerToDiscardButton" to="." method="_on_add_joker_to_discard_button_pressed"]
+[connection signal="pressed" from="Buttons/HBoxContainer/RandomDiscardToHandButton" to="." method="_on_random_discard_to_hand_button_pressed"]
+[connection signal="pressed" from="Buttons/HBoxContainer/AddJokerToDropzonesButton" to="." method="_on_add_joker_to_dropzones_button_pressed"]
+[connection signal="pressed" from="Buttons/HBoxContainer/MoveFromDropzoneToPileButton" to="." method="_on_move_from_dropzone_to_pile_button_pressed"]
+[connection signal="pressed" from="Buttons/HBoxContainer/MoveClubToDiamonds" to="." method="_on_move_club_to_diamonds_pressed"]
+[connection signal="pressed" from="Buttons/HBoxContainer/RemoveRandCardInHandFromGame" to="." method="_on_remove_rand_card_in_hand_from_game_pressed"]
+[connection signal="pressed" from="Buttons/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]

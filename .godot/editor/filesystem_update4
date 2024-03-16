@@ -1,0 +1,9 @@
+res://board.tscn
+res://example__dropzone__play_by_suit.gd
+res://cards/card-database.json
+res://example__card_ui.tscn
+res://example.tscn
+res://addons/simple_card_pile_ui/card_ui.tscn
+res://example__dropzone__play_all_suits.gd
+res://example__dropzone__play_any_suits.gd
+res://example.gd
