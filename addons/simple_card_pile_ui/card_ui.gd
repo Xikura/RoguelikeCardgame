@@ -6,7 +6,7 @@ signal card_hovered(card: CardUI)
 signal card_unhovered(card: CardUI)
 signal card_clicked(card: CardUI)
 signal card_dropped(card: CardUI)
-
+signal card_active(card: CardUI)
 
 @onready var frontface = $Frontface
 @onready var backface = $Backface
@@ -18,6 +18,7 @@ signal card_dropped(card: CardUI)
 var frontface_texture : String
 var backface_texture : String
 var is_clicked := false
+var is_active := false
 var mouse_is_hovering := false
 var target_position := Vector2.ZERO
 var return_speed := 0.2
@@ -96,19 +97,32 @@ func _on_mouse_exited():
 	
 func _on_gui_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+
 		if event.pressed:
 			var parent = get_parent()
 			
 			if _card_can_be_interacted_with():
+				if parent is CardPileUI and parent.is_card_ui_in_hand(self):
+					
+					is_active = !is_active
+					print("Is card active: ", is_active)
+					
+					if is_active:
+						var all_dropzones := []
+						get_dropzones(get_tree().get_root(), "PrimaryDropzone", all_dropzones)
+						print(all_dropzones)
+						#position -= Vector2(0, 75).rotated(rotation)
+						 #or global_position += Vector3(10,0,0)
+						#position.y = lerp(position.y, position.y + 40, return_speed)
+				
 				is_clicked = true
-				rotation = 0
+				# rotation = 0
 				parent.reset_card_ui_z_index()
 				emit_signal("card_clicked", self)
-			
+				
 			if parent is CardPileUI and parent.get_card_pile_size(CardPileUI.Piles.draw_pile) > 0 and parent.is_hand_enabled() and parent.get_cards_in_pile(CardPileUI.Piles.draw_pile).find(self) != -1 and not parent.is_any_card_ui_clicked() and parent.click_draw_pile_to_draw:
 				parent.draw(1)
 		else:
-			#event released
 			if is_clicked:
 				is_clicked = false
 				mouse_is_hovering = false
@@ -125,7 +139,6 @@ func _on_gui_input(event):
 							break
 				emit_signal("card_dropped", self)
 				emit_signal("card_unhovered", self)
-			
 
 func get_dropzones(node: Node, className : String, result : Array) -> void:
 	if node is CardDropzone:

@@ -1,5 +1,6 @@
 extends Node2D
 
+var hand_size = 8
 
 @onready var card_pile_ui := $CardPileUI
 @onready var dropzones := [
@@ -10,7 +11,10 @@ extends Node2D
 
 func _ready():
 	randomize()
+	reset()
 
+func reset():
+	card_pile_ui.draw(hand_size)
 
 func _get_rand_joker():
 	return "Black Joker" if randi_range(0, 1) else "Red Joker"
@@ -57,6 +61,7 @@ func _on_random_discard_to_hand_button_pressed():
 
 func _on_reset_button_pressed():
 	card_pile_ui.reset()
+	reset()
 
 
 func _on_discard_hand_button_pressed():

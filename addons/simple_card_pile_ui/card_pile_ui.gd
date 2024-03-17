@@ -10,6 +10,7 @@ signal card_unhovered(card: CardUI)
 signal card_clicked(card: CardUI)
 signal card_dropped(card: CardUI)
 signal card_removed_from_game(card: CardUI)
+signal card_added_to_active(card: CardUI)
 
 enum Piles {
 	draw_pile,
@@ -36,7 +37,6 @@ enum PilesCardLayouts {
 @export_group("Pile Displays")
 @export var stack_display_gap := 8
 @export var max_stack_display := 6
-
 
 @export_group("Cards")
 @export var card_return_speed := 0.15
@@ -71,7 +71,6 @@ var card_collection := [] # an array of JSON `Card` data
 var _draw_pile := [] # an array of `CardUI`s
 var _hand_pile := [] # an array of `CardUI`s
 var _discard_pile := [] # an array of `CardUI`s
-
 
 var spread_curve := Curve.new()
 
