@@ -50,3 +50,6 @@ theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 14
 text = "Nice name"
+
+[connection signal="card_active" from="." to="." method="_on_card_active"]
+[connection signal="card_inactive" from="." to="." method="_on_card_inactive"]

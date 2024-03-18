@@ -10,7 +10,7 @@
   },
   {
 	"nice_name": "3 of Hearts",
-	"texture_path": "res://cards/front/card_hearts_new_03.png",
+	"texture_path": "res://cards/front/card_hearts_03.png",
 	"backface_texture_path": "res://cards/back/card_back.png",
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 3,
@@ -82,7 +82,7 @@
   },
   {
 	"nice_name": "Jack of Hearts",
-	"texture_path": "res://cards/front/card_hearts_new_J.png",
+	"texture_path": "res://cards/front/card_hearts_J.png",
 	"backface_texture_path": "res://cards/back/card_back.png",
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 11,
@@ -91,7 +91,7 @@
   },
   {
 	"nice_name": "Queen of Hearts",
-	"texture_path": "res://cards/front/card_hearts_new_Q.png",
+	"texture_path": "res://cards/front/card_hearts_Q.png",
 	"backface_texture_path": "res://cards/back/card_back.png",
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 12,
@@ -100,7 +100,7 @@
   },
   {
 	"nice_name": "King of Hearts",
-	"texture_path": "res://cards/front/card_hearts_new_K.png",
+	"texture_path": "res://cards/front/card_hearts_K.png",
 	"backface_texture_path": "res://cards/back/card_back.png",
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 13,

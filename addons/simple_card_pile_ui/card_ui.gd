@@ -1,26 +1,25 @@
 @tool
 class_name CardUI extends Control
 
-
 signal card_hovered(card: CardUI)
 signal card_unhovered(card: CardUI)
 signal card_clicked(card: CardUI)
 signal card_dropped(card: CardUI)
 signal card_active(card: CardUI)
+signal card_inactive(card: CardUI)
 
 @onready var frontface = $Frontface
 @onready var backface = $Backface
 
+@export var card_data: CardUIData
 
-@export var card_data : CardUIData
-
-
-var frontface_texture : String
-var backface_texture : String
+var frontface_texture: String
+var backface_texture: String
 var is_clicked := false
 var is_active := false
 var mouse_is_hovering := false
 var target_position := Vector2.ZERO
+var active_position := Vector2.ZERO
 var return_speed := 0.2
 var hover_distance := 10
 var drag_when_clicked := true
@@ -28,12 +27,11 @@ var drag_when_clicked := true
 func get_class(): return "CardUI"
 func is_class(name): return name == "CardUI"
 
-
-func set_direction(card_is_facing : Vector2):
+func set_direction(card_is_facing: Vector2):
 	backface.visible = card_is_facing == Vector2.DOWN
 	frontface.visible = card_is_facing == Vector2.UP
 
-func set_disabled(val : bool):
+func set_disabled(val: bool):
 	if val:
 		mouse_is_hovering = false
 		is_clicked = false
@@ -57,8 +55,6 @@ func _ready():
 		pivot_offset = frontface.texture.get_size() / 2
 		mouse_filter = Control.MOUSE_FILTER_PASS
 
-
-
 func _card_can_be_interacted_with():
 	var parent = get_parent()
 	var valid = false
@@ -71,8 +67,6 @@ func _card_can_be_interacted_with():
 		if dropzone:
 			valid = dropzone.get_top_card() == self and not parent.is_any_card_ui_clicked()
 	return valid
-			
-
 
 func _on_mouse_enter():
 	#check if is hovering should be turned on
@@ -82,7 +76,6 @@ func _on_mouse_enter():
 		var parent = get_parent()
 		parent.reset_card_ui_z_index()
 		emit_signal("card_hovered", self)
-
 
 func _on_mouse_exited():
 	if is_clicked:
@@ -94,7 +87,31 @@ func _on_mouse_exited():
 		if parent is CardPileUI:
 			parent.reset_card_ui_z_index()
 		emit_signal("card_unhovered", self)
+
+#func _on_active():
+	#if is_clicked:
+		#return
+	#elif:
+		#pass
+
+func toggle_card_active():
+	var parent = get_parent()
 	
+	#is_active = !is_active
+	if !is_active:
+		if parent.add_card_to_active_cards(self):
+			#is_active = true
+			active_position = target_position
+			active_position.y -= 50
+			#parent.add_card_to_active_cards(self)
+			emit_signal("card_active", self)
+	else:
+		if parent.remove_card_from_active_cards(self):
+			#is_active = false
+			active_position = target_position
+			active_position.y += 50
+			emit_signal("card_inactive", self)
+
 func _on_gui_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 
@@ -103,30 +120,21 @@ func _on_gui_input(event):
 			
 			if _card_can_be_interacted_with():
 				if parent is CardPileUI and parent.is_card_ui_in_hand(self):
-					
-					is_active = !is_active
-					print("Is card active: ", is_active)
-					
-					if is_active:
-						var all_dropzones := []
-						get_dropzones(get_tree().get_root(), "PrimaryDropzone", all_dropzones)
-						print(all_dropzones)
-						#position -= Vector2(0, 75).rotated(rotation)
-						 #or global_position += Vector3(10,0,0)
-						#position.y = lerp(position.y, position.y + 40, return_speed)
-				
+					toggle_card_active()
+					#print("Is card active: ", is_active)
+					# position -= Vector2(0, 75).rotated(rotation)
 				is_clicked = true
-				# rotation = 0
+				#rotation = 0
 				parent.reset_card_ui_z_index()
 				emit_signal("card_clicked", self)
 				
-			if parent is CardPileUI and parent.get_card_pile_size(CardPileUI.Piles.draw_pile) > 0 and parent.is_hand_enabled() and parent.get_cards_in_pile(CardPileUI.Piles.draw_pile).find(self) != -1 and not parent.is_any_card_ui_clicked() and parent.click_draw_pile_to_draw:
+			if parent is CardPileUI and parent.get_card_pile_size(CardPileUI.Piles.draw_pile) > 0 and parent.is_hand_enabled() and parent.get_cards_in_pile(CardPileUI.Piles.draw_pile).find(self) != - 1 and not parent.is_any_card_ui_clicked() and parent.click_draw_pile_to_draw:
 				parent.draw(1)
 		else:
 			if is_clicked:
 				is_clicked = false
 				mouse_is_hovering = false
-				rotation = 0
+				#rotation = 0
 				var parent = get_parent()
 				if parent is CardPileUI and parent.is_card_ui_in_hand(self):
 					parent.call_deferred("reset_target_positions")
@@ -140,7 +148,7 @@ func _on_gui_input(event):
 				emit_signal("card_dropped", self)
 				emit_signal("card_unhovered", self)
 
-func get_dropzones(node: Node, className : String, result : Array) -> void:
+func get_dropzones(node: Node, className: String, result: Array) -> void:
 	if node is CardDropzone:
 		result.push_back(node)
 	for child in node.get_children():
@@ -162,8 +170,8 @@ var last_child_count = 0
 
 func _get_configuration_warnings():
 	if get_child_count() != 2:
-		return [ "This node must have 2 TextureRect as children, one named `Frontface` and one named `Backface`." ]
+		return ["This node must have 2 TextureRect as children, one named `Frontface` and one named `Backface`."]
 	for child in get_children():
 		if not child is TextureRect or (child.name != "Frontface" and child.name != "Backface"):
-			return [ "This node must have 2 TextureRect as children, one named `Frontface` and one named `Backface`." ]
+			return ["This node must have 2 TextureRect as children, one named `Frontface` and one named `Backface`."]
 	return []

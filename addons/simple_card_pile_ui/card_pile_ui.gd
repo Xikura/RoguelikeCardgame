@@ -10,7 +10,14 @@ signal card_unhovered(card: CardUI)
 signal card_clicked(card: CardUI)
 signal card_dropped(card: CardUI)
 signal card_removed_from_game(card: CardUI)
+
+# Active cards
 signal card_added_to_active(card: CardUI)
+signal card_removed_from_active(card: CardUI)
+signal active_cards_updated
+
+# Scoring
+signal start_scoring
 
 enum Piles {
 	draw_pile,
@@ -74,6 +81,80 @@ var _discard_pile := [] # an array of `CardUI`s
 
 var spread_curve := Curve.new()
 
+var hand_size = 8
+
+var active_cards = []
+var max_active_cards = 5
+
+func wait_seconds(seconds: float) -> void:
+	await get_tree().create_timer(seconds).timeout
+
+
+func add_card_to_active_cards(card: CardUI):
+	if active_cards.size() == max_active_cards:
+		print("max cards reached", active_cards.size())
+		return false
+	else:
+		active_cards.push_back(card)
+		card.is_active = true
+		print("active card size:", active_cards.size())
+		emit_signal("card_added_to_active", card)
+		emit_signal("active_cards_updated")
+		return true
+
+func remove_card_from_active_cards(card: CardUI):
+	if active_cards.find(card) != -1:
+		card.is_active = false
+		active_cards.erase(card)
+		emit_signal("card_removed_from_active", card)
+		emit_signal("active_cards_updated")
+		return true
+	else:
+		return false
+
+# Should this also clear active_status?
+func remove_all_from_active_cards():
+	for card in active_cards:
+		card.is_active = false
+		emit_signal("card_removed_from_active", card)
+	active_cards = []
+	emit_signal("active_cards_updated")
+
+func play_active_cards():
+	if active_cards.size() == 0:
+		return false
+		
+	# Get primary dropzone
+	var primary_dropzone: PrimaryDropzone
+	var all_dropzones := []
+	_get_dropzones(get_tree().get_root(), "CardDropzone", all_dropzones)
+	for dropzone in all_dropzones:
+		if dropzone is PrimaryDropzone:
+			primary_dropzone = dropzone
+	
+	# Duplicating arrays to modify
+	#var cards_to_discard = primary_dropzone.get_held_cards()
+	var cards_to_play = active_cards.duplicate()
+	
+	# Add all active cards to dropzone
+	for card in cards_to_play:
+		card.rotation = 0
+		set_card_dropzone(card, primary_dropzone)
+	
+	#Remove all from active cards
+	remove_all_from_active_cards()
+	
+	# Start scoring:
+	emit_signal("start_scoring")
+	
+	# Remove played cards
+	await wait_seconds(1.3)
+	for card in cards_to_play:
+		set_card_pile(card, Piles.discard_pile)
+		print("Dropzone count:", primary_dropzone._held_cards.size())
+	
+	# Add cards again
+	
 
 
 # this is really the only way we should move cards between piles
@@ -89,18 +170,21 @@ func set_card_pile(card : CardUI, pile : Piles):
 	if pile == Piles.draw_pile:
 		_draw_pile.push_back(card)
 		emit_signal("draw_pile_updated")
+	remove_card_from_active_cards(card)
 	reset_target_positions()
 	
 func set_card_dropzone(card : CardUI, dropzone : CardDropzone):
 	_maybe_remove_card_from_any_piles(card)
 	_maybe_remove_card_from_any_dropzones(card)
 	dropzone.add_card(card)
+	remove_card_from_active_cards(card)
 	emit_signal("card_added_to_dropzone", dropzone, card)
 	reset_target_positions()
 	
 func remove_card_from_game(card : CardUI):
 	_maybe_remove_card_from_any_piles(card)
 	_maybe_remove_card_from_any_dropzones(card)
+	remove_card_from_active_cards(card)
 	emit_signal("card_removed_from_game", card)
 	card.queue_free()
 	reset_target_positions()
@@ -134,8 +218,6 @@ func get_card_pile_size(pile : Piles):
 	elif pile == Piles.draw_pile:
 		return _draw_pile.size()
 	return 0
-	
-
 
 func _maybe_remove_card_from_any_piles(card : CardUI):
 	if _hand_pile.find(card) != -1:
@@ -149,12 +231,11 @@ func _maybe_remove_card_from_any_piles(card : CardUI):
 		emit_signal("discard_pile_updated")
 		
 
-
 func create_card_in_dropzone(nice_name : String, dropzone : CardDropzone):
 	var card_ui = _create_card_ui(_get_card_data_by_nice_name(nice_name))
 	card_ui.position = dropzone.position
 	set_card_dropzone(card_ui, dropzone)
-			
+
 func create_card_in_pile(nice_name : String, pile_to_add_to : Piles):
 	var card_ui = _create_card_ui(_get_card_data_by_nice_name(nice_name))
 	if pile_to_add_to == Piles.hand_pile:
@@ -164,7 +245,6 @@ func create_card_in_pile(nice_name : String, pile_to_add_to : Piles):
 	if pile_to_add_to == Piles.draw_pile:
 		card_ui.position = draw_pile_position
 	set_card_pile(card_ui, pile_to_add_to)
-
 
 func _maybe_remove_card_from_any_dropzones(card : CardUI):
 	var all_dropzones := []
@@ -182,7 +262,7 @@ func get_card_dropzone(card : CardUI):
 			return dropzone
 	return null
 
-			
+
 func _get_dropzones(node: Node, className : String, result : Array) -> void:
 	if node is CardDropzone:
 		result.push_back(node)
@@ -197,7 +277,6 @@ func load_json_path():
 func _load_json_cards_from_path(path : String):
 	# Log path:
 	print("Loading JSON from: " + path)
-	
 
 	var found = []
 	if path:
@@ -212,6 +291,7 @@ func reset():
 	_reset_card_collection()
 
 func _reset_card_collection():
+	remove_all_from_active_cards()
 	for child in get_children():
 		_maybe_remove_card_from_any_piles(child)
 		_maybe_remove_card_from_any_dropzones(child)

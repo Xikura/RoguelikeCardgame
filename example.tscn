@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bayw73ve8ui7r"]
+[gd_scene load_steps=15 format=3 uid="uid://bayw73ve8ui7r"]
 
 [ext_resource type="Script" path="res://example.gd" id="1_0dn0o"]
 [ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_pile_ui_debugger.gd" id="2_7gbt2"]
 [ext_resource type="Script" path="res://example__dropzone__discard.gd" id="3_7f8qk"]
 [ext_resource type="Script" path="res://example__dropzone__play_primary.gd" id="3_7ovgx"]
 [ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_pile_ui.gd" id="3_axm7s"]
+[ext_resource type="Script" path="res://AttackPower.gd" id="3_mw4ul"]
 [ext_resource type="Texture2D" uid="uid://bpjxsk1mxfl77" path="res://assets/1x1_#ffffffff.png" id="4_eyd4o"]
 [ext_resource type="PackedScene" uid="uid://bs2vgjwuarxm5" path="res://example__card_ui.tscn" id="6_df1s4"]
 [ext_resource type="Script" path="res://example__dropzone__play_joker.gd" id="6_y3x2e"]
@@ -12,6 +13,24 @@
 [sub_resource type="Theme" id="Theme_oqbkv"]
 Button/font_sizes/font_size = 12
 RichTextLabel/font_sizes/normal_font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_mo35p"]
+font_size = 25
+font_color = Color(1, 0.309804, 0.121569, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.0509804)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_c2tqv"]
+font_size = 25
+font_color = Color(0.121569, 0.913725, 1, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.0509804)
+shadow_offset = Vector2(2, 2)
 
 [sub_resource type="Curve" id="Curve_ayyaa"]
 min_value = -15.0
@@ -27,12 +46,19 @@ point_count = 3
 [node name="Example" type="Node2D"]
 script = ExtResource("1_0dn0o")
 
-[node name="Buttons" type="Control" parent="."]
+[node name="UserInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1600.0
+offset_bottom = 900.0
+size_flags_horizontal = 4
+
+[node name="Buttons" type="Control" parent="UserInterface"]
 layout_mode = 3
 anchors_preset = 0
 theme = SubResource("Theme_oqbkv")
 
-[node name="HBoxContainer" type="GridContainer" parent="Buttons"]
+[node name="HBoxContainer" type="GridContainer" parent="UserInterface/Buttons"]
 layout_mode = 2
 offset_left = 13.0
 offset_top = 35.0
@@ -40,65 +66,85 @@ offset_right = 318.0
 offset_bottom = 285.0
 scale = Vector2(0.9, 0.9)
 columns = 2
-metadata/_edit_group_ = true
 
-[node name="DrawButton" type="Button" parent="Buttons/HBoxContainer"]
+[node name="SortBySuitButton" type="Button" parent="UserInterface/Buttons/HBoxContainer"]
 layout_mode = 2
-text = "Draw"
+text = "Sort by suit"
 
-[node name="Draw3Button" type="Button" parent="Buttons/HBoxContainer"]
+[node name="SortByValueButton" type="Button" parent="UserInterface/Buttons/HBoxContainer"]
 layout_mode = 2
-text = "Draw 3"
+text = "Sort by value"
 
-[node name="SortButton" type="Button" parent="Buttons/HBoxContainer"]
-layout_mode = 2
-text = "Sort Hand"
-
-[node name="DiscardRandomButton" type="Button" parent="Buttons/HBoxContainer"]
+[node name="DiscardRandomButton" type="Button" parent="UserInterface/Buttons/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Discard Random"
 
-[node name="DiscardHandButton" type="Button" parent="Buttons/HBoxContainer"]
+[node name="DiscardHandButton" type="Button" parent="UserInterface/Buttons/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Discard Hand"
 
-[node name="AddJokerToHandButton" type="Button" parent="Buttons/HBoxContainer"]
+[node name="AddJokerToHandButton" type="Button" parent="UserInterface/Buttons/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Add Joker To Hand"
 
-[node name="AddJokerToDiscardButton" type="Button" parent="Buttons/HBoxContainer"]
+[node name="AddJokerToDiscardButton" type="Button" parent="UserInterface/Buttons/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Add Joker To Discard"
 
-[node name="RandomDiscardToHandButton" type="Button" parent="Buttons/HBoxContainer"]
+[node name="RandomDiscardToHandButton" type="Button" parent="UserInterface/Buttons/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Return Random Discard
 To Hand"
 
-[node name="AddJokerToDropzonesButton" type="Button" parent="Buttons/HBoxContainer"]
+[node name="DiscardActiveCardsButton" type="Button" parent="UserInterface/Buttons/HBoxContainer"]
+layout_mode = 2
+text = "Discard selected cards"
+
+[node name="AddJokerToDropzonesButton" type="Button" parent="UserInterface/Buttons/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Add Joker To Dropzones"
 
-[node name="MoveFromDropzoneToPileButton" type="Button" parent="Buttons/HBoxContainer"]
+[node name="MoveFromDropzoneToPileButton" type="Button" parent="UserInterface/Buttons/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Discard Top Card
 of all Dropzones"
 
-[node name="MoveClubToDiamonds" type="Button" parent="Buttons/HBoxContainer"]
+[node name="MoveClubToDiamonds" type="Button" parent="UserInterface/Buttons/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Move Top Club Dropzone
 to Diamonds"
 
-[node name="RemoveRandCardInHandFromGame" type="Button" parent="Buttons/HBoxContainer"]
+[node name="RemoveRandCardInHandFromGame" type="Button" parent="UserInterface/Buttons/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Remove Random Card
 In Hand From Game"
 
-[node name="ResetButton" type="Button" parent="Buttons/HBoxContainer"]
+[node name="ResetButton" type="Button" parent="UserInterface/Buttons/HBoxContainer"]
 layout_mode = 2
 text = "Reset"
 
-[node name="CardPileUIDebugger" type="RichTextLabel" parent="Buttons" node_paths=PackedStringArray("card_pile_ui")]
+[node name="PlayActiveCardsButton" type="Button" parent="UserInterface/Buttons/HBoxContainer"]
+layout_mode = 2
+text = "Play selected"
+
+[node name="AddAttackButton" type="Button" parent="UserInterface/Buttons/HBoxContainer"]
+layout_mode = 2
+text = "Add attack"
+
+[node name="AddDefenceButton" type="Button" parent="UserInterface/Buttons/HBoxContainer"]
+layout_mode = 2
+text = "Add defence"
+
+[node name="CardPileUIDebugger" type="RichTextLabel" parent="UserInterface/Buttons" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 2
 offset_left = 13.0
 offset_top = 295.0
@@ -106,7 +152,45 @@ offset_right = 287.0
 offset_bottom = 391.0
 scroll_following = true
 script = ExtResource("2_7gbt2")
-card_pile_ui = NodePath("../../CardPileUI")
+card_pile_ui = NodePath("../../../CardPileUI")
+
+[node name="AttackPowerLabel" type="Label" parent="UserInterface"]
+layout_mode = 0
+offset_left = 867.0
+offset_top = 174.0
+offset_right = 1023.0
+offset_bottom = 197.0
+text = "Attack Power"
+horizontal_alignment = 1
+
+[node name="AttackPower" type="Label" parent="UserInterface"]
+offset_left = 820.0
+offset_top = 205.0
+offset_right = 1070.0
+offset_bottom = 240.0
+text = "0"
+label_settings = SubResource("LabelSettings_mo35p")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_mw4ul")
+
+[node name="DefencePowerLabel" type="Label" parent="UserInterface"]
+offset_left = 867.0
+offset_top = 70.0
+offset_right = 1023.0
+offset_bottom = 93.0
+text = "Defence power"
+horizontal_alignment = 1
+
+[node name="DefencePower" type="Label" parent="UserInterface"]
+offset_left = 821.0
+offset_top = 101.0
+offset_right = 1071.0
+offset_bottom = 136.0
+text = "100"
+label_settings = SubResource("LabelSettings_c2tqv")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CardDropzone_Primary" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
@@ -121,7 +205,6 @@ card_pile_ui = NodePath("../CardPileUI")
 stack_display_gap = 145
 max_stack_display = 5
 can_drag_top_card = false
-can_drag_any_card = true
 layout = 2
 metadata/_edit_group_ = true
 
@@ -148,6 +231,8 @@ offset_right = 1191.0
 offset_bottom = 735.0
 script = ExtResource("3_7f8qk")
 card_pile_ui = NodePath("../CardPileUI")
+stack_display_gap = 3
+max_stack_display = 3
 card_ui_face_up = false
 can_drag_top_card = false
 
@@ -169,6 +254,7 @@ text = "Discard"
 horizontal_alignment = 1
 
 [node name="CardDropzone_Jokers" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 314.0
@@ -227,18 +313,19 @@ hand_rotation_curve = SubResource("Curve_ayyaa")
 hand_vertical_curve = SubResource("Curve_afhc1")
 discard_face_up = false
 
-[connection signal="pressed" from="Buttons/HBoxContainer/DrawButton" to="." method="_on_draw_button_pressed"]
-[connection signal="pressed" from="Buttons/HBoxContainer/Draw3Button" to="." method="_on_draw_3_button_pressed"]
-[connection signal="pressed" from="Buttons/HBoxContainer/SortButton" to="." method="_on_sort_button_pressed"]
-[connection signal="pressed" from="Buttons/HBoxContainer/DiscardRandomButton" to="." method="_on_discard_random_button_pressed"]
-[connection signal="pressed" from="Buttons/HBoxContainer/DiscardHandButton" to="." method="_on_discard_hand_button_pressed"]
-[connection signal="pressed" from="Buttons/HBoxContainer/AddJokerToHandButton" to="." method="_on_add_joker_to_hand_button_pressed"]
-[connection signal="pressed" from="Buttons/HBoxContainer/AddJokerToDiscardButton" to="." method="_on_add_joker_to_discard_button_pressed"]
-[connection signal="pressed" from="Buttons/HBoxContainer/RandomDiscardToHandButton" to="." method="_on_random_discard_to_hand_button_pressed"]
-[connection signal="pressed" from="Buttons/HBoxContainer/AddJokerToDropzonesButton" to="." method="_on_add_joker_to_dropzones_button_pressed"]
-[connection signal="pressed" from="Buttons/HBoxContainer/MoveFromDropzoneToPileButton" to="." method="_on_move_from_dropzone_to_pile_button_pressed"]
-[connection signal="pressed" from="Buttons/HBoxContainer/MoveClubToDiamonds" to="." method="_on_move_club_to_diamonds_pressed"]
-[connection signal="pressed" from="Buttons/HBoxContainer/RemoveRandCardInHandFromGame" to="." method="_on_remove_rand_card_in_hand_from_game_pressed"]
-[connection signal="pressed" from="Buttons/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
-[connection signal="card_clicked" from="CardPileUI" to="CardDropzone_Primary" method="_on_card_pile_ui_card_clicked"]
-[connection signal="card_clicked" from="CardPileUI" to="CardPileUI" method="_on_card_clicked"]
+[connection signal="pressed" from="UserInterface/Buttons/HBoxContainer/SortBySuitButton" to="." method="_on_sort_by_suit_button_pressed"]
+[connection signal="pressed" from="UserInterface/Buttons/HBoxContainer/SortByValueButton" to="." method="_on_sort_by_value_button_pressed"]
+[connection signal="pressed" from="UserInterface/Buttons/HBoxContainer/DiscardRandomButton" to="." method="_on_discard_random_button_pressed"]
+[connection signal="pressed" from="UserInterface/Buttons/HBoxContainer/DiscardHandButton" to="." method="_on_discard_hand_button_pressed"]
+[connection signal="pressed" from="UserInterface/Buttons/HBoxContainer/AddJokerToHandButton" to="." method="_on_add_joker_to_hand_button_pressed"]
+[connection signal="pressed" from="UserInterface/Buttons/HBoxContainer/AddJokerToDiscardButton" to="." method="_on_add_joker_to_discard_button_pressed"]
+[connection signal="pressed" from="UserInterface/Buttons/HBoxContainer/RandomDiscardToHandButton" to="." method="_on_random_discard_to_hand_button_pressed"]
+[connection signal="pressed" from="UserInterface/Buttons/HBoxContainer/DiscardActiveCardsButton" to="." method="_on_discard_active_cards_button_pressed"]
+[connection signal="pressed" from="UserInterface/Buttons/HBoxContainer/AddJokerToDropzonesButton" to="." method="_on_add_joker_to_dropzones_button_pressed"]
+[connection signal="pressed" from="UserInterface/Buttons/HBoxContainer/MoveFromDropzoneToPileButton" to="." method="_on_move_from_dropzone_to_pile_button_pressed"]
+[connection signal="pressed" from="UserInterface/Buttons/HBoxContainer/MoveClubToDiamonds" to="." method="_on_move_club_to_diamonds_pressed"]
+[connection signal="pressed" from="UserInterface/Buttons/HBoxContainer/RemoveRandCardInHandFromGame" to="." method="_on_remove_rand_card_in_hand_from_game_pressed"]
+[connection signal="pressed" from="UserInterface/Buttons/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="UserInterface/Buttons/HBoxContainer/PlayActiveCardsButton" to="." method="_on_play_active_cards_button_pressed"]
+[connection signal="pressed" from="UserInterface/Buttons/HBoxContainer/AddAttackButton" to="." method="_on_add_attack_button_pressed"]
+[connection signal="pressed" from="UserInterface/Buttons/HBoxContainer/AddDefenceButton" to="." method="_on_add_defence_button_pressed"]
