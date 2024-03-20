@@ -14,7 +14,7 @@ signal card_removed_from_game(card: CardUI)
 # Active cards
 signal card_added_to_active(card: CardUI)
 signal card_removed_from_active(card: CardUI)
-signal active_cards_updated
+signal active_cards_updated(cards: Array)
 
 # Scoring
 signal start_scoring
@@ -86,6 +86,8 @@ var hand_size = 8
 var active_cards = []
 var max_active_cards = 5
 
+
+
 func wait_seconds(seconds: float) -> void:
 	await get_tree().create_timer(seconds).timeout
 
@@ -99,7 +101,7 @@ func add_card_to_active_cards(card: CardUI):
 		card.is_active = true
 		print("active card size:", active_cards.size())
 		emit_signal("card_added_to_active", card)
-		emit_signal("active_cards_updated")
+		emit_signal("active_cards_updated", active_cards)
 		return true
 
 func remove_card_from_active_cards(card: CardUI):
@@ -107,7 +109,7 @@ func remove_card_from_active_cards(card: CardUI):
 		card.is_active = false
 		active_cards.erase(card)
 		emit_signal("card_removed_from_active", card)
-		emit_signal("active_cards_updated")
+		emit_signal("active_cards_updated", active_cards)
 		return true
 	else:
 		return false
@@ -118,7 +120,7 @@ func remove_all_from_active_cards():
 		card.is_active = false
 		emit_signal("card_removed_from_active", card)
 	active_cards = []
-	emit_signal("active_cards_updated")
+	emit_signal("active_cards_updated", active_cards)
 
 func play_active_cards():
 	if active_cards.size() == 0:
