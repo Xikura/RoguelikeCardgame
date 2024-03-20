@@ -15,6 +15,6 @@ func _ready():
 	card_pile_ui.connect("card_clicked", func(card): text += "%s clicked\n" % card.card_data.nice_name)
 	card_pile_ui.connect("card_dropped", func(card): text += "%s dropped\n" % card.card_data.nice_name)
 	card_pile_ui.connect("card_removed_from_game", func(card): text += "%s removed from game\n" % card.card_data.nice_name)
-	card_pile_ui.connect("active_cards_updated", func(): text += "Active cards updated\n")
+	card_pile_ui.connect("active_cards_updated", func(cards): text += "Active cards updated\n")
 	card_pile_ui.connect("card_added_to_active", func(card): text += "%s added to active cards\n" % card.card_data.nice_name)
 	card_pile_ui.connect("card_removed_from_active", func(card): text += "%s removed from active cards\n" % card.card_data.nice_name)

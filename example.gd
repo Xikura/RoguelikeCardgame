@@ -1,6 +1,6 @@
 extends Node2D
 
-var hand_size = 8
+var hand_size = 12
 
 @onready var card_pile_ui := $CardPileUI
 @onready var dropzones := [
