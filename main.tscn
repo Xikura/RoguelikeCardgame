@@ -1,14 +1,14 @@
 [gd_scene load_steps=15 format=3 uid="uid://bayw73ve8ui7r"]
 
-[ext_resource type="Script" path="res://example.gd" id="1_0dn0o"]
-[ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_pile_ui_debugger.gd" id="2_7gbt2"]
-[ext_resource type="Script" path="res://example__dropzone__discard.gd" id="3_7f8qk"]
-[ext_resource type="Script" path="res://example__dropzone__play_primary.gd" id="3_7ovgx"]
-[ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_pile_ui.gd" id="3_axm7s"]
-[ext_resource type="Script" path="res://AttackPower.gd" id="3_mw4ul"]
-[ext_resource type="Texture2D" uid="uid://bpjxsk1mxfl77" path="res://assets/1x1_#ffffffff.png" id="4_eyd4o"]
-[ext_resource type="PackedScene" uid="uid://bs2vgjwuarxm5" path="res://example__card_ui.tscn" id="6_df1s4"]
-[ext_resource type="Script" path="res://example__dropzone__play_joker.gd" id="6_y3x2e"]
+[ext_resource type="Script" path="res://main.gd" id="1_u7ubx"]
+[ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_pile_ui_debugger.gd" id="2_1q0lw"]
+[ext_resource type="Script" path="res://AttackPower.gd" id="3_gxb3j"]
+[ext_resource type="Script" path="res://dropzone__play_primary.gd" id="4_1piph"]
+[ext_resource type="Texture2D" uid="uid://bpjxsk1mxfl77" path="res://assets/1x1_#ffffffff.png" id="5_vv1nj"]
+[ext_resource type="Script" path="res://dropzone__discard.gd" id="6_exgym"]
+[ext_resource type="Script" path="res://dropzone__play_commander.gd" id="7_5f6x5"]
+[ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_pile_ui.gd" id="8_kqdhh"]
+[ext_resource type="PackedScene" uid="uid://bs2vgjwuarxm5" path="res://card_ui.tscn" id="9_6eh1h"]
 
 [sub_resource type="Theme" id="Theme_oqbkv"]
 Button/font_sizes/font_size = 12
@@ -44,7 +44,7 @@ _data = [Vector2(0, 0), 0.0, 127.284, 0, 0, Vector2(0.5, 40), 0.0, 0.0, 0, 0, Ve
 point_count = 3
 
 [node name="Example" type="Node2D"]
-script = ExtResource("1_0dn0o")
+script = ExtResource("1_u7ubx")
 
 [node name="UserInterface" type="Control" parent="."]
 layout_mode = 3
@@ -152,7 +152,7 @@ offset_top = 295.0
 offset_right = 287.0
 offset_bottom = 391.0
 scroll_following = true
-script = ExtResource("2_7gbt2")
+script = ExtResource("2_1q0lw")
 card_pile_ui = NodePath("../../../CardPileUI")
 
 [node name="AttackPowerLabel" type="Label" parent="UserInterface"]
@@ -174,7 +174,7 @@ text = "0"
 label_settings = SubResource("LabelSettings_mo35p")
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("3_mw4ul")
+script = ExtResource("3_gxb3j")
 
 [node name="DefencePowerLabel" type="Label" parent="UserInterface"]
 layout_mode = 0
@@ -207,7 +207,7 @@ text = "None"
 label_settings = SubResource("LabelSettings_mo35p")
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("3_mw4ul")
+script = ExtResource("3_gxb3j")
 
 [node name="CardDropzone_Primary" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
@@ -224,7 +224,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("3_7ovgx")
+script = ExtResource("4_1piph")
 card_type = "regular"
 card_pile_ui = NodePath("../CardPileUI")
 stack_display_gap = 145
@@ -245,7 +245,7 @@ offset_right = 8.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_eyd4o")
+texture = ExtResource("5_vv1nj")
 
 [node name="CardDropzone_Discard" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
@@ -254,7 +254,7 @@ offset_left = 1750.0
 offset_top = 300.0
 offset_right = 1893.0
 offset_bottom = 540.0
-script = ExtResource("3_7f8qk")
+script = ExtResource("6_exgym")
 card_pile_ui = NodePath("../CardPileUI")
 stack_display_gap = 3
 max_stack_display = 3
@@ -270,7 +270,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_eyd4o")
+texture = ExtResource("5_vv1nj")
 
 [node name="DiscardLabel" type="Label" parent="CardDropzone_Discard"]
 layout_mode = 0
@@ -287,7 +287,7 @@ offset_left = 314.0
 offset_top = 43.0
 offset_right = 1020.0
 offset_bottom = 223.0
-script = ExtResource("6_y3x2e")
+script = ExtResource("7_5f6x5")
 card_type = "joker"
 card_pile_ui = NodePath("../CardPileUI")
 stack_display_gap = 145
@@ -309,7 +309,7 @@ offset_right = 8.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_eyd4o")
+texture = ExtResource("5_vv1nj")
 
 [node name="DiamondsLabel" type="Label" parent="CardDropzone_Jokers"]
 layout_mode = 0
@@ -324,10 +324,10 @@ text = "Generals
 [node name="CardPileUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("3_axm7s")
+script = ExtResource("8_kqdhh")
 json_card_database_path = "res://cards/card-database.json"
 json_card_collection_path = "res://cards/card-starter-deck-01.json"
-extended_card_ui = ExtResource("6_df1s4")
+extended_card_ui = ExtResource("9_6eh1h")
 draw_pile_position = Vector2(1400, 700)
 hand_pile_position = Vector2(750, 650)
 discard_pile_position = Vector2(1750, 300)
