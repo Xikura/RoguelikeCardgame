@@ -6,6 +6,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 2,
 	"suit": "H",
+	"color": "green",
+	"division": "support",
+	"type": ["light"],
 	"card_type": "regular"
   },
   {
@@ -15,6 +18,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 3,
 	"suit": "H",
+	"color": "green",
+	"division": "support",
+	"type": ["light"],
 	"card_type": "regular"
   },
   {
@@ -24,6 +30,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 4,
 	"suit": "H",
+	"color": "green",
+	"division": "support",
+	"type": ["light"],
 	"card_type": "regular"
   },
   {
@@ -33,6 +42,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 5,
 	"suit": "H",
+	"color": "green",
+	"division": "support",
+	"type": ["light"],
 	"card_type": "regular"
   },
   {
@@ -42,6 +54,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 6,
 	"suit": "H",
+	"color": "green",
+	"division": "support",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -51,6 +66,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 7,
 	"suit": "H",
+	"color": "green",
+	"division": "support",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -60,6 +78,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 8,
 	"suit": "H",
+	"color": "green",
+	"division": "support",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -69,6 +90,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 9,
 	"suit": "H",
+	"color": "green",
+	"division": "support",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -78,6 +102,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 10,
 	"suit": "H",
+	"color": "green",
+	"division": "support",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -87,6 +114,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 11,
 	"suit": "H",
+	"color": "green",
+	"division": "support",
+	"type": ["heavy"],
 	"card_type": "regular"
   },
   {
@@ -96,6 +126,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 12,
 	"suit": "H",
+	"color": "green",
+	"division": "support",
+	"type": ["heavy"],
 	"card_type": "regular"
   },
   {
@@ -105,6 +138,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 13,
 	"suit": "H",
+	"color": "green",
+	"division": "support",
+	"type": ["heavy"],
 	"card_type": "regular"
   },
   {
@@ -114,6 +150,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 14,
 	"suit": "H",
+	"color": "green",
+	"division": "support",
+	"type": ["special","light"],
 	"card_type": "regular"
   },
   {
@@ -123,6 +162,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 2,
 	"suit": "D",
+	"color": "green",
+	"division": "army",
+	"type": ["light"],
 	"card_type": "regular"
   },
   {
@@ -132,6 +174,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 3,
 	"suit": "D",
+	"color": "green",
+	"division": "army",
+	"type": ["light"],
 	"card_type": "regular"
   },
   {
@@ -141,6 +186,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 4,
 	"suit": "D",
+	"color": "green",
+	"division": "army",
+	"type": ["light"],
 	"card_type": "regular"
   },
   {
@@ -150,6 +198,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 5,
 	"suit": "D",
+	"color": "green",
+	"division": "army",
+	"type": ["light"],
 	"card_type": "regular"
   },
   {
@@ -159,6 +210,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 6,
 	"suit": "D",
+	"color": "green",
+	"division": "army",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -168,6 +222,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 7,
 	"suit": "D",
+	"color": "green",
+	"division": "army",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -177,6 +234,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 8,
 	"suit": "D",
+	"color": "green",
+	"division": "army",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -186,6 +246,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 9,
 	"suit": "D",
+	"color": "green",
+	"division": "army",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -195,6 +258,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 10,
 	"suit": "D",
+	"color": "green",
+	"division": "army",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -204,6 +270,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 11,
 	"suit": "D",
+	"color": "green",
+	"division": "army",
+	"type": ["heavy"],
 	"card_type": "regular"
   },
   {
@@ -213,6 +282,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 12,
 	"suit": "D",
+	"color": "green",
+	"division": "army",
+	"type": ["heavy"],
 	"card_type": "regular"
   },
   {
@@ -222,6 +294,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 13,
 	"suit": "D",
+	"color": "green",
+	"division": "army",
+	"type": ["heavy"],
 	"card_type": "regular"
   },
   {
@@ -231,6 +306,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 14,
 	"suit": "D",
+	"color": "green",
+	"division": "army",
+	"type": ["special","light"],
 	"card_type": "regular"
   },
   {
@@ -240,6 +318,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 2,
 	"suit": "C",
+	"color": "blue",
+	"division": "navy",
+	"type": ["light"],
 	"card_type": "regular"
   },
   {
@@ -249,6 +330,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 3,
 	"suit": "C",
+	"color": "blue",
+	"division": "navy",
+	"type": ["light"],
 	"card_type": "regular"
   },
   {
@@ -258,6 +342,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 4,
 	"suit": "C",
+	"color": "blue",
+	"division": "navy",
+	"type": ["light"],
 	"card_type": "regular"
   },
   {
@@ -267,6 +354,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 5,
 	"suit": "C",
+	"color": "blue",
+	"division": "navy",
+	"type": ["light"],
 	"card_type": "regular"
   },
   {
@@ -276,6 +366,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 6,
 	"suit": "C",
+	"color": "blue",
+	"division": "navy",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -285,6 +378,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 7,
 	"suit": "C",
+	"color": "blue",
+	"division": "navy",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -294,6 +390,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 8,
 	"suit": "C",
+	"color": "blue",
+	"division": "navy",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -303,6 +402,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 9,
 	"suit": "C",
+	"color": "blue",
+	"division": "navy",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -312,6 +414,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 10,
 	"suit": "C",
+	"color": "blue",
+	"division": "navy",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -321,6 +426,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 11,
 	"suit": "C",
+	"color": "blue",
+	"division": "navy",
+	"type": ["heavy"],
 	"card_type": "regular"
   },
   {
@@ -330,6 +438,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 12,
 	"suit": "C",
+	"color": "blue",
+	"division": "navy",
+	"type": ["heavy"],
 	"card_type": "regular"
   },
   {
@@ -339,6 +450,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 13,
 	"suit": "C",
+	"color": "blue",
+	"division": "navy",
+	"type": ["heavy"],
 	"card_type": "regular"
   },
   {
@@ -348,6 +462,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 14,
 	"suit": "C",
+	"color": "blue",
+	"division": "navy",
+	"type": ["special","light"],
 	"card_type": "regular"
   },
   {
@@ -357,6 +474,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 2,
 	"suit": "S",
+	"color": "blue",
+	"division": "airforce",
+	"type": ["light"],
 	"card_type": "regular"
   },
   {
@@ -366,6 +486,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 3,
 	"suit": "S",
+	"color": "blue",
+	"division": "airforce",
+	"type": ["light"],
 	"card_type": "regular"
   },
   {
@@ -375,6 +498,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 4,
 	"suit": "S",
+	"color": "blue",
+	"division": "airforce",
+	"type": ["light"],
 	"card_type": "regular"
   },
   {
@@ -384,6 +510,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 5,
 	"suit": "S",
+	"color": "blue",
+	"division": "airforce",
+	"type": ["light"],
 	"card_type": "regular"
   },
   {
@@ -393,6 +522,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 6,
 	"suit": "S",
+	"color": "blue",
+	"division": "airforce",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -402,6 +534,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 7,
 	"suit": "S",
+	"color": "blue",
+	"division": "airforce",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -411,6 +546,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 8,
 	"suit": "S",
+	"color": "blue",
+	"division": "airforce",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -420,6 +558,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 9,
 	"suit": "S",
+	"color": "blue",
+	"division": "airforce",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -429,6 +570,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 10,
 	"suit": "S",
+	"color": "blue",
+	"division": "airforce",
+	"type": ["primary"],
 	"card_type": "regular"
   },
   {
@@ -438,6 +582,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 11,
 	"suit": "S",
+	"color": "blue",
+	"division": "airforce",
+	"type": ["heavy"],
 	"card_type": "regular"
   },
   {
@@ -447,6 +594,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 12,
 	"suit": "S",
+	"color": "blue",
+	"division": "airforce",
+	"type": ["heavy"],
 	"card_type": "regular"
   },
   {
@@ -456,6 +606,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 13,
 	"suit": "S",
+	"color": "blue",
+	"division": "airforce",
+	"type": ["heavy"],
 	"card_type": "regular"
   },
   {
@@ -465,6 +618,9 @@
 	"resource_script_path": "res://cards/card-data-regular.gd",
 	"value": 14,
 	"suit": "S",
+	"color": "blue",
+	"division": "airforce",
+	"type": ["special","light"],
 	"card_type": "regular"
   },
   {
