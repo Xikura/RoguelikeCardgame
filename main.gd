@@ -101,13 +101,14 @@ func sort_cards():
 		sort_cards_by_value()
 	
 func sort_cards_by_suit():
+	var suit_weights = {'S': 4, 'H': 3, 'C': 2, 'D': 1} // To make cards show up black - red - black - red
 	current_sort = SortBy.suit
 	card_pile_ui.remove_all_from_active_cards()
 	card_pile_ui.sort_hand(func(a, b): 
 		if a.card_data.suit == b.card_data.suit:
 			return b.card_data.value < a.card_data.value
 		else:
-			return a.card_data.suit < b.card_data.suit
+			return suit_weights[a.card_data.suit] < suit_weights[b.card_data.suit]
 	)
 	
 func sort_cards_by_value():
